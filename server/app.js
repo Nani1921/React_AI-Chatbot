@@ -1,4 +1,3 @@
-// server.js or index.js
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
@@ -10,7 +9,7 @@ const app = express();
 
 // Configure CORS
 const corsOptions = {
-  origin: "https://react-ai-chatbot-cvue.vercel.app/", // Allow requests from the frontend (adjust if necessary)
+  origin: "https://react-ai-chatbot-cvue.vercel.app", // Allow requests from your frontend (update if necessary)
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type"],
   credentials: true,
@@ -33,8 +32,5 @@ app.get("/", (req, res) => {
   res.send("<center><h1>Now Server is Online!</h1></center>");
 });
 
-// Set up the port
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+// Export the server for Vercel (serverless)
+module.exports = app;
