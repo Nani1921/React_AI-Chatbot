@@ -17,15 +17,16 @@ const Register = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post('https://react-ai-chatbot-eta.vercel.app/user/register', formData);
-      setMessage(response.data.message); // Display success or error message
-    } catch (error) {
-      setMessage(error.response?.data?.message || 'An error occurred');
-    }
-  };
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const response = await axios.post('https://react-ai-chatbot-eta.vercel.app/user/register', formData);
+    setMessage(response.data.message); // Display success or error message
+  } catch (error) {
+    setMessage(error.response?.data?.message || 'An error occurred');
+  }
+};
+
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f3f4f6' }}>
