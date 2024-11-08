@@ -20,34 +20,14 @@ const Register = () => {
 const handleSubmit = async (e) => {
   e.preventDefault();
   try {
-    // Make POST request to backend
-    const response = await axios.post(
-      'https://react-ai-chatbot-eta.vercel.app/user/register', // Backend API URL
-      formData,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        withCredentials: true, // If you are using cookies for sessions
-      }
-    );
-    
-    // On success, display the success message
+    const response = await axios.post('https://react-ai-chatbot-eta.vercel.app/user/register', formData);
     setMessage(response.data.message);
   } catch (error) {
-    // If an error occurs, display error message
-    if (error.response) {
-      // Server-side errors
-      setMessage(error.response?.data?.message || 'An error occurred on the server');
-    } else if (error.request) {
-      // No response received from server
-      setMessage('No response received from the server');
-    } else {
-      // Other errors (like network issues)
-      setMessage('An unexpected error occurred');
-    }
+    console.error("Error occurred: ", error); // Log the full error
+    setMessage(error.response?.data?.message || 'An error occurred');
   }
 };
+
 
 
   return (
