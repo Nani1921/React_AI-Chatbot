@@ -3,12 +3,12 @@ import axios from 'axios';
 
 const Register = () => {
   const [formData, setFormData] = useState({
-    username: '',
+    username: '', // Add username here
     email: '',
     password: '',
   });
 
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
 
   const handleChange = (e) => {
     setFormData({
@@ -20,10 +20,10 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/user/register", formData);
+      const response = await axios.post('http://localhost:5000/user/register', formData);
       setMessage(response.data.message); // Display success or error message
     } catch (error) {
-      setMessage(error.response?.data?.message || "An error occurred");
+      setMessage(error.response?.data?.message || 'An error occurred');
     }
   };
 
@@ -35,15 +35,45 @@ const Register = () => {
         {message && <p style={{ color: '#2563eb', textAlign: 'center' }}>{message}</p>}
         
         <label style={{ fontWeight: 'bold', color: '#4b5563' }}>Username</label>
-        <input type="text" name="username" value={formData.username} onChange={handleChange} style={{ width: '100%', padding: '0.75rem', margin: '0.5rem 0', border: '1px solid #d1d5db', borderRadius: '0.375rem' }} />
+        <input
+          type="text"
+          name="username" // Add username input
+          value={formData.username}
+          onChange={handleChange}
+          style={{ width: '100%', padding: '0.75rem', margin: '0.5rem 0', border: '1px solid #d1d5db', borderRadius: '0.375rem' }}
+        />
 
         <label style={{ fontWeight: 'bold', color: '#4b5563' }}>Email</label>
-        <input type="email" name="email" value={formData.email} onChange={handleChange} style={{ width: '100%', padding: '0.75rem', margin: '0.5rem 0', border: '1px solid #d1d5db', borderRadius: '0.375rem' }} />
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          style={{ width: '100%', padding: '0.75rem', margin: '0.5rem 0', border: '1px solid #d1d5db', borderRadius: '0.375rem' }}
+        />
 
         <label style={{ fontWeight: 'bold', color: '#4b5563' }}>Password</label>
-        <input type="password" name="password" value={formData.password} onChange={handleChange} style={{ width: '100%', padding: '0.75rem', margin: '0.5rem 0', border: '1px solid #d1d5db', borderRadius: '0.375rem' }} />
+        <input
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          style={{ width: '100%', padding: '0.75rem', margin: '0.5rem 0', border: '1px solid #d1d5db', borderRadius: '0.375rem' }}
+        />
 
-        <button type="submit" style={{ width: '100%', padding: '0.75rem', backgroundColor: '#2563eb', color: 'white', fontWeight: 'bold', borderRadius: '0.375rem', marginTop: '1rem', cursor: 'pointer' }}>
+        <button
+          type="submit"
+          style={{
+            width: '100%',
+            padding: '0.75rem',
+            backgroundColor: '#2563eb',
+            color: 'white',
+            fontWeight: 'bold',
+            borderRadius: '0.375rem',
+            marginTop: '1rem',
+            cursor: 'pointer',
+          }}
+        >
           Register
         </button>
       </form>

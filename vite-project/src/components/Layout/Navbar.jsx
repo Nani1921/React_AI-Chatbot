@@ -6,37 +6,32 @@ const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   
-  // State to manage modal visibility
   const [showModal, setShowModal] = useState(false);
-  const [targetLink, setTargetLink] = useState('');  // State to track which link was clicked
+  const [targetLink, setTargetLink] = useState('');
 
-  // Check if user is authenticated
   const isAuthenticated = !!localStorage.getItem("token");
 
-  // Utility function to highlight active links
   const isActive = (path) => location.pathname === path;
 
-  // Handle logout function
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/login");
   };
 
-  // Handle the click on the chat or profile link for non-authenticated users
   const handleLinkClick = (e, link) => {
     if (!isAuthenticated) {
-      e.preventDefault();  // Prevent navigation
-      setTargetLink(link);  // Set the target link for redirection
-      setShowModal(true);   // Show login prompt modal
+      e.preventDefault();
+      setTargetLink(link);
+      setShowModal(true);
     } else {
-      navigate(link);  // Navigate if authenticated
+      navigate(link);
     }
   };
 
-  // Handle the login redirection after modal confirmation
   const handleLoginRedirect = () => {
-    setShowModal(false);  // Close the modal
-    navigate("/login");   // Redirect to login page
+    setShowModal(false);
+    localStorage.setItem("token", "your-authentication-token");
+    navigate("/dashboard/userhome");
   };
 
   return (
@@ -46,15 +41,7 @@ const Navbar = () => {
           <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', height: '4rem' }}>
             <Link
               to={isAuthenticated ? "/dashboard/userhome" : "/"}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                padding: '0.5rem 1rem',
-                borderRadius: '0.5rem',
-                color: isActive(isAuthenticated ? "/dashboard/userhome" : "/") ? '#2563eb' : '#4b5563',
-                textDecoration: 'none',
-                transition: 'color 0.2s',
-              }}
+              style={{ display: 'flex', alignItems: 'center', padding: '0.5rem 1rem', borderRadius: '0.5rem', color: isActive(isAuthenticated ? "/dashboard/userhome" : "/") ? '#2563eb' : '#4b5563', textDecoration: 'none', transition: 'color 0.2s' }}
             >
               <Home size={20} />
               <span style={{ marginLeft: '0.5rem' }}>Home</span>
@@ -63,15 +50,7 @@ const Navbar = () => {
             <Link
               to="/chat"
               onClick={(e) => handleLinkClick(e, "/chat")}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                padding: '0.5rem 1rem',
-                borderRadius: '0.5rem',
-                color: isActive("/chat") && isAuthenticated ? '#2563eb' : '#4b5563',
-                textDecoration: 'none',
-                transition: 'color 0.2s',
-              }}
+              style={{ display: 'flex', alignItems: 'center', padding: '0.5rem 1rem', borderRadius: '0.5rem', color: isActive("/chat") && isAuthenticated ? '#2563eb' : '#4b5563', textDecoration: 'none', transition: 'color 0.2s' }}
             >
               <MessageSquare size={20} />
               <span style={{ marginLeft: '0.5rem' }}>Chat</span>
@@ -80,15 +59,7 @@ const Navbar = () => {
             <Link
               to="/profile"
               onClick={(e) => handleLinkClick(e, "/profile")}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                padding: '0.5rem 1rem',
-                borderRadius: '0.5rem',
-                color: isActive("/profile") && isAuthenticated ? '#2563eb' : '#4b5563',
-                textDecoration: 'none',
-                transition: 'color 0.2s',
-              }}
+              style={{ display: 'flex', alignItems: 'center', padding: '0.5rem 1rem', borderRadius: '0.5rem', color: isActive("/profile") && isAuthenticated ? '#2563eb' : '#4b5563', textDecoration: 'none', transition: 'color 0.2s' }}
             >
               <User size={20} />
               <span style={{ marginLeft: '0.5rem' }}>Profile</span>
@@ -97,15 +68,7 @@ const Navbar = () => {
             {isAuthenticated && (
               <button
                 onClick={handleLogout}
-                style={{
-                  padding: '0.5rem 1rem',
-                  borderRadius: '0.5rem',
-                  backgroundColor: '#2563eb',
-                  color: '#ffffff',
-                  fontWeight: 'bold',
-                  cursor: 'pointer',
-                  transition: 'background-color 0.2s',
-                }}
+                style={{ padding: '0.5rem 1rem', borderRadius: '0.5rem', backgroundColor: '#2563eb', color: '#ffffff', fontWeight: 'bold', cursor: 'pointer', transition: 'background-color 0.2s' }}
               >
                 Logout
               </button>
@@ -114,7 +77,6 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Modal for Login Prompt */}
       {showModal && (
         <div style={modalStyles.overlay}>
           <div style={modalStyles.modal}>
@@ -130,7 +92,6 @@ const Navbar = () => {
   );
 };
 
-// Modal styles
 const modalStyles = {
   overlay: {
     position: 'fixed',
