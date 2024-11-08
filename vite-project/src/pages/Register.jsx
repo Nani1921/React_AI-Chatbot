@@ -20,7 +20,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/user/register', formData);
+      const response = await axios.post('https://react-ai-chatbot-eta.vercel.app/user/register', formData);
       setMessage(response.data.message); // Display success or error message
     } catch (error) {
       setMessage(error.response?.data?.message || 'An error occurred');
