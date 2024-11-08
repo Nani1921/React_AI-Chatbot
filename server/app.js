@@ -10,7 +10,7 @@ const app = express();
 
 // Configure CORS
 const corsOptions = {
-  origin: "http://localhost:5173", // Allow requests from the frontend (adjust if necessary)
+  origin: "https://react-ai-chatbot-cvue.vercel.app/", // Allow requests from the frontend (adjust if necessary)
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type"],
   credentials: true,
